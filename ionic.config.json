@@ -1,0 +1,7 @@
+{
+  "name": "Sunnyway",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
