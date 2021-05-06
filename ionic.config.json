@@ -1,7 +1,8 @@
 {
   "name": "Sunnyway",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title mode="md">Sent Messages</ion-title>
+    <ion-buttons slot="end">
+      <button id="close-modal" class="button" (click)="dismissModal()">
+        <img src="assets/imgs/close-icon.svg" />
+      </button>	
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-content id="page-messages">
+	<ion-list *ngIf="messages.length > 0" id="message-list">
+		<ion-item *ngFor="let item of messages" class="message-item" text-wrap>
+			<div class="item-content">
+				<h5 [innerHTML]="item.message"></h5>
+				<p ng-if="item.sent">Sent: {{item.sent}}</p>
+				<p ng-if="item.expiration">Expires: {{item.expiration}}</p>
+			</div>		
+		</ion-item>																		
+  </ion-list>
+  <p id="no-recent-messages" *ngIf="messages.length == 0">There are no recent messages to display.</p>
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title mode="ios">Add An Item</ion-title>
+		<button mode="ios" slot="end" id="close-modal" class="button" (click)="dismissModal()">
+			<img src="assets/imgs/close-icon.svg" />
+	    </button>	
+	</ion-toolbar>
+</ion-header>
+<ion-content id="page-add-list-item">
+	<form (ngSubmit)="addItem($event)">
+		<input type="text" (keyup)="removeWarning()" [(ngModel)]="item" name="item"/>
+		<input type="submit" value="Add this Item" />
+	</form>
+	<p id="add-your-item" *ngIf="formSubmitted && item == ''">Please enter your item.</p>
+</ion-content>

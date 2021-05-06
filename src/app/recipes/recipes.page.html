@@ -1,0 +1,24 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Recipes</ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content id="page-recipes">
+	<ion-select [(ngModel)]="selected" *ngIf="categories" placeholder="All Categories">
+		<ion-select-option value="0">
+			All Categories
+		</ion-select-option>
+   		<ion-select-option *ngFor="let category of categories" value="{{category.id}}">
+   			{{category.name}}
+   		</ion-select-option>
+    </ion-select>
+	<ion-list *ngIf="recipes.length > 0" id="recipe-list">
+		<div *ngFor="let recipe of recipes">
+			<div *ngIf="recipe | filter: selected">
+				<ion-item (click)="openRecipesDetail(recipe)">
+					<h5 [innerHTML]="recipe.name"></h5>
+				</ion-item>
+			</div>
+		</div>		
+	</ion-list>	
+</ion-content>

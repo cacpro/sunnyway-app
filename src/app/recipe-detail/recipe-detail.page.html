@@ -1,0 +1,26 @@
+<ion-header>
+	<ion-toolbar>
+    <ion-buttons mode="ios" slot="start">
+      <ion-button [routerLink]="'/tabs/recipes'" routerDirection="back">
+        <span>
+          <img id="back-arrow" src="/assets/imgs/arrow-white-right.svg" />
+        </span>
+      </ion-button>
+    </ion-buttons>
+		<ion-title>Recipes</ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content id="single-recipe-content" scroll="true" has-subheader="true">
+	<h2 [innerHTML]="recipe.name"></h2>
+	<div id="ingredients">
+		<p><strong>Ingredients</strong></p>
+		<p *ngFor="let ingredient of recipe.ingredients" [innerHTML]="ingredient.ingredient"></p>
+	</div>
+	<div id="directions">
+		<p><strong>Directions</strong></p>
+		<div [innerHTML]="recipe.directions"></div>
+	</div>
+	<div id="share-recipe-container">
+		<a id="share-recipe" href="#" (click)="openLink($event, recipe.link)">Share Recipe</a>
+	</div>
+</ion-content>

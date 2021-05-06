@@ -1,0 +1,22 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Savings</ion-title>
+	</ion-toolbar>
+	<ion-toolbar class="savings-dates">
+		<p>Prices are effective from {{savingsData.startDate}} - {{savingsData.endDate}} </p>
+	</ion-toolbar>
+</ion-header>
+<ion-content id="page-savings" padding>
+	<p class="disclaimer">Hot Foods are only available in the Upstairs Cafe of the Greencastle store.</p>
+	<div id="savings">
+		<div *ngFor="let item of savingsData.categories;" class="savings-category" [ngStyle]="{'background-image' : 'url(assets/imgs/savings-' + item.slug + '-background.png)'}">	
+			<button (click)="openSavingsDetail(item.slug, item.id, item.name, savingsData.startDate, savingsData.endDate)">
+				<div class="savings-wrapper">
+					<div class="savings-text">
+						<h2 [innerHTML]="item.name"></h2>
+					</div>
+				</div>
+			</button>
+		</div>																					
+	</div>		
+</ion-content>

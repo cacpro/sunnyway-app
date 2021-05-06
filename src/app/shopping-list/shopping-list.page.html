@@ -1,0 +1,73 @@
+<ion-header>
+	<ion-toolbar>
+    <ion-buttons mode="ios" slot="start">
+      <button *ngIf="specials.length > 0 || custom.length > 0" (click)="deleteAllItems()" id="remove-all-items">
+		<ion-icon name="icon-remove"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Shopping List</ion-title>
+    <ion-buttons mode="ios" slot="end">
+      <button (click)="showNewItemModal()" id="add-item">
+		<ion-icon name="icon-add"></ion-icon>
+      </button>
+    </ion-buttons>
+	</ion-toolbar>
+</ion-header>
+<ion-content id="page-shopping-list">
+	<ion-list *ngIf="specials.length > 0 || custom.length > 0">
+		<div *ngIf="specials.length > 0">
+			<ion-list *ngFor="let special of specials | sort:'category'">
+				<ion-list-header>
+					<h4 [innerHTML]="special.category"></h4>
+				</ion-list-header>
+				<ion-item *ngIf="special.items.length > 0" class="header" lines="none">
+					<ion-list lines="none" mode="ios" *ngIf="special.items.length > 0">
+						<ion-item-sliding *ngFor="let item of special.items | sort:'title'">
+							<ion-item lines="full">
+								<div class="checkbox-container">
+									<div (click)="updateItem($event, 'savings', item.id)" class="checkbox" [ngClass]="{'checked' : item.checked}"></div>
+								</div>
+								<div class="list-content">
+									<h5 [ngClass]="{'checked' : item.checked }" [innerHTML]="item.title"></h5>
+									<p><strong *ngIf="item.price" [innerHTML]="item.price"></strong><span *ngIf="item.size"> | {{item.size}}</span><span *ngIf="item.details"> | {{item.details}}</span></p>
+									<p *ngIf="item.expiration" [innerHTML]="'EXP ' + item.expiration"></p>							
+								</div>
+							</ion-item>	
+							<ion-item-options>
+								<button (click)="removeItem('savings', item.id, special.category, true)">
+							    	Remove
+							    </button>	
+							</ion-item-options>			
+						</ion-item-sliding>
+					</ion-list>
+				</ion-item>
+			</ion-list>
+		</div>
+		<div *ngIf="custom.length > 0">
+			<ion-list>
+				<ion-list-header>
+					<h4>Uncategorized</h4>
+				</ion-list-header>
+				<ion-item class="header" lines="none">
+					<ion-list lines="none" mode="ios">
+						<ion-item-sliding *ngFor="let item of custom | sort: 'title'">
+							<ion-item>
+								<div class="checkbox-container">
+									<div (click)="updateItem('mine', item.id)" class="checkbox" [ngClass]="{'checked' : item.checked}"></div>
+								</div>
+								<div class="list-content">
+									<h5 [ngClass]="{'checked' : item.checked }" [innerHTML]="item.title"></h5>
+								</div>			
+							</ion-item>
+							<ion-item-options>
+								<button (click)="removeItem('mine', item.id)">
+									Remove
+								</button>	
+							</ion-item-options>
+						</ion-item-sliding>
+					</ion-list>
+				</ion-item>
+			</ion-list>	
+		</div>
+	</ion-list>	
+</ion-content>

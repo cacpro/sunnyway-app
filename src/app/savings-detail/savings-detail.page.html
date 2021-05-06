@@ -1,0 +1,41 @@
+<ion-header>
+	<ion-toolbar>
+    <ion-buttons mode="ios" slot="start">
+      <ion-button [routerLink]="'/tabs/savings'" routerDirection="back">
+        <span>
+          <img id="back-arrow" src="/assets/imgs/arrow-white-right.svg" />
+        </span>
+      </ion-button>
+    </ion-buttons>
+		<ion-title mode="ios">Savings</ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content id="page-savings-detail">
+	<div id="savings-content-header" [ngStyle]="{'background-image' : 'url(assets/imgs/savings-' + categorySlug + '-background.png)'}">
+		<div id="savings-content-header-wrapper">
+			<div id="savings-content-header-text">
+				<h1 [innerHTML]="categoryName"></h1>
+			</div>
+		</div>
+	</div>
+	<ion-list id="savings-list">
+		<ion-item *ngFor="let item of savings" class="savings-item" text-wrap>
+			<div class="item-content">
+				<h5 [innerHTML]="item.name"></h5>
+				<p><strong>{{item.pricing}}</strong><span *ngIf="item.size"> | {{item.size}}</span><span *ngIf="item.description"> | {{item.description}}</span></p>
+				<p class="special-sale" *ngIf="item.sale_start_date">
+					<img src="assets/imgs/calendar-icon.svg" />
+					{{item.sale_start_date}} - {{item.sale_end_date}}
+				</p>
+			</div>
+			<div class="select-item" [ngClass]="{'added' : item.added }" (click)="toggleItemToList(item.id, item.name, item.pricing, item.size, item.description, endDate, item.added, categoryName)">
+				<div class="plus-icon">
+					<img class="static" src="assets/imgs/add-shopping-icon-off.svg" />
+					<img class="active" src="assets/imgs/add-shopping-icon-on.svg" />
+				</div>
+				<p class="not-added" [ngClass]="{'hide' : item.added }">Add to List</p>
+				<p class="added" [ngClass]="{'show' : item.added }">Added!</p>
+			</div>		
+		</ion-item>																		
+	</ion-list>
+</ion-content>

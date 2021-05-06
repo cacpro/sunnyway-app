@@ -1,0 +1,30 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Pump Perks</ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content id="page-pump-perks">
+	<div id="pumpperks">
+		<div id="introduction">
+			<p><strong>Earn 10 cents on every $100 you spend.</strong></p>		
+			<p>There is no limit to the discount you can earn.  Earn rewards this month, and you have until the last day of the next month to redeem those rewards.</p>
+		</div>	
+		<div *ngIf="displayForm" id="account-login">
+			<p><strong>Enter your Pump Perks account number:</strong></p>
+			<div id="login-container">
+				<form>
+					<input [(ngModel)]="accountNumber" name="account" type="tel" />
+					<a (click)="fetchPumpPerks($event)" href="#"></a>
+				</form>
+			</div>
+		</div>
+		<div id="pump-perks-icon-container">
+			<ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+		</div>
+		<div *ngIf="!displayForm" id="account-details">
+			<h3>You currently have <span [innerHTML]="account.redeemableRewards"></span> off a gallon!</h3>
+			<p *ngIf="validExpirationDate"><span [innerHTML]="account.expiringRewards"></span> Expire on {{account.expiringRewardsDate}}</p>
+		</div>	
+		<a id="pumpperks-logout" *ngIf="!displayForm" href="#" (click)="logoutPumpPerks($event)">Logout</a>
+	</div>
+</ion-content>
